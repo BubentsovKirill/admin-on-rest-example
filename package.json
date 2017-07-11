@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "admin-on-rest": "^1.2.0",
+    "aor-rich-text-input": "^1.0.1",
     "fakerest": "^2.0.0",
     "fetch-mock": "^5.12.1",
     "react-scripts": "1.0.10",

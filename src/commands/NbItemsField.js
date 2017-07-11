@@ -12,4 +12,5 @@ const NbItemsField = (props) => (
 NbItemsField.defaultProps = {
     source : "basket"
 }
+
 export default NbItemsField;

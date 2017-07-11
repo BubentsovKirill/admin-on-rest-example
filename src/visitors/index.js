@@ -80,7 +80,9 @@ const dateFieldStyle = {
 };
 export const VisitorEdit = (props) => (
     <Edit {...props} title={<VisitorTitle/>}>
+        {/*TODO: форма для TabsForm*/}
         <TabbedForm>
+            {/*TODO:  сами табы*/}
             <FormTab label="identity">
                 <TextInput source="first_name" style={textInputStyle.first}/>
                 <TextInput source="last_name" style={textInputStyle.last}/>
@@ -95,7 +97,7 @@ export const VisitorEdit = (props) => (
                 <TextInput source="address"
                            options={{fullWidth : true}}
                            style={{width:530}}/>
-                <TextInput source="zipcode" style={textInputStyle.firts}/>
+                <TextInput source="zipcode" style={textInputStyle.first}/>
                 <TextInput source="city" style={textInputStyle.last}/>
             </FormTab>
             <FormTab label="orders">
@@ -119,7 +121,7 @@ export const VisitorEdit = (props) => (
                         {/*TODO: ProductReferenceField - ссылка на product*/}
                         <ProductReferenceField/>
                         <StarRatingFiled/>
-                        {/*style -- надодим красоту в коментарии*/}
+                        {/*style -- наводим красоту в коментарии*/}
                         <TextField source="comment" style={{ maxWidth: '20em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}/>
                         <EditButton/>
                     </Datagrid>
@@ -144,6 +146,5 @@ const VisitorTitleDelete = ({record}) => <span>
     &nbsp;&nbsp;
     {record && `${record.first_name} ${record.last_name}`}
 </span>;
-
 export const VisitorDelete = (props) => <Delete title={<VisitorTitleDelete/>} {...props}/>
 

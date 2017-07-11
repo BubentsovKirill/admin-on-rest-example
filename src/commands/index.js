@@ -16,7 +16,8 @@ import {
     BooleanInput,
     Filter,
     TextInput,
-    NullableBooleanInput
+    NullableBooleanInput,
+    Delete
 } from 'admin-on-rest';
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import NbItemsFiled from './NbItemsField';
@@ -39,13 +40,18 @@ const CommandFilter = (props) => (
 
 export const CommandList = (props) => (
     <List {...props} filters={<CommandFilter/>}>
-        <Datagrid bodyOptions={{ stripedRows: true, showRowHover: true }}>
+        {/*TODO:Стили для списка*/}
+        <Datagrid bodyOptions={{ stripedRows: true, showRowHover: true }} perPage={30}>
+            {/*showTime - в поле Date показывать дополнительно время*/}
             <DateField source="date" showTime/>
             <TextField source="reference"/>
+            {/*ссылка на пользователя*/}
             <CustomerReferenceField/>
+            {/*количество элементов в корзине*/}
             <NbItemsFiled/>
             <NumberField source="total" options={{ style: 'currency', currency: 'USD' }}/>
             <TextField source="status"/>
+            {/*выводит boolean значения*/}
             <BooleanField source="returned"/>
             <EditButton/>
         </Datagrid>
@@ -55,7 +61,7 @@ export const CommandList = (props) => (
 
 const CommandTitle = ({record}) => (
     <span> Order #{record.reference}</span>
-)
+);
 
 //TODO: выбор пользователей через список. для обьединения использую optionText={choice => ......}
 export const CommandEdit = (props) => (
@@ -63,8 +69,10 @@ export const CommandEdit = (props) => (
         <SimpleForm>
             <DateInput source="date"/>
             <ReferenceInput source="customer_id" reference="customers" label="Costumers">
+                {/*TODO: AutocompleteInput - обьединяем first_name + last_name, через - (choice) */}
                 <AutocompleteInput optionText={choice => `${choice.first_name} ${choice.last_name}`} />
             </ReferenceInput>
+            {/*сравнивает приходящие значение с id, выводит name совпадшего id*/}
             <SelectInput source="status" choices={[
                 {id: 'delivered', name: 'delivered'},
                 {id: 'ordered', name: 'ordered'},
@@ -73,4 +81,13 @@ export const CommandEdit = (props) => (
             <BooleanInput source="returned"/>
         </SimpleForm>
     </Edit>
-)
+);
+
+//TODO: Title для удаления элемента
+const CommandTitleDelete = ({record}) => (
+    <span>
+        Delete #{record.reference}
+    </span>
+);
+//TODO: Кастомная форма для удаления элемента
+export const CommandDelete = (props) => (<Delete title={<CommandTitleDelete/>} {...props}/>);
